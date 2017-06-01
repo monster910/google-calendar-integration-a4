@@ -1,4 +1,5 @@
 import {AfterViewInit, Injectable} from '@angular/core';
+import {GoogleLoadApiService} from './google-load-api.service';
 
 @Injectable()
 export class GoogleAuthenticationService {
@@ -8,21 +9,37 @@ export class GoogleAuthenticationService {
   static scopes = ['https://www.googleapis.com/auth/calendar.readonly'];
 
   public isAuthenticated = false;
-  loadAPI: Promise<any>
+
 
   constructor() {
     // check the authentication
-    const self = this;
-    window['checkAuth'] = function() {
-      self.authenticate(true);
-    };
+    // this.authenticate(true);
+  }
+
+  public loadAPI() {
+    if (window['gapi'] && window['gapi'].client) {
+      return new Promise((resolve, reject) => {
+        resolve(window['gapi'].client);
+      });
+    } else {
+      return this.authenticate(true);
+    }
   }
 
   private authenticate(immediateAuth: boolean) {
-    return this.internalAuthentication(immediateAuth)
-      .then(() => this.initializeCalendarAPI())
-      .then((response: any) => this.authenticated(response))
-      .catch((error: any) => { console.log('authentication failed: ' + error); });
+    return new Promise((resolve, reject) => {
+      GoogleLoadApiService.load()
+        .then((gapi) => this.internalAuthentication(immediateAuth))
+        .then((authenticated) => {
+          this.authenticated(authenticated);
+          resolve(window['gapi'].client);
+        })
+        .catch((error: any) => {
+          console.log('authentication failed: ' + error);
+          reject(error);
+        });
+
+    });
   }
 
   private internalAuthentication(immediateAuth: boolean) {
@@ -39,27 +56,19 @@ export class GoogleAuthenticationService {
         (authData) => {
           if (authData && ! authData.error) {
             this.isAuthenticated = true;
-            this.authenticated('');
-            resolve();
+            resolve(this.isAuthenticated);
           } else {
             this.isAuthenticated = false;
-            this.authenticated(null);
-            reject();
+            reject(this.isAuthenticated);
           }
         });
 
     });
   }
 
-  private authenticated(response: any) {
-    console.log('post authentication on: ' + response );
-    console.log(window['gapi'].client.calendar);
+  private authenticated(isAuthenitcated: boolean) {
+    console.log('post authentication status: ' + isAuthenitcated );
+    console.log(window['gapi'].client);
   }
 
-  private initializeCalendarAPI() {
-    return new Promise((resolve, reject) => {
-      console.log('initialize Google Calendar API');
-      resolve(window['gapi'].client.load('calendar', 'v3'));
-    });
-  }
 }
