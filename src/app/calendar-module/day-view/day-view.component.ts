@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GoogleCalendarService} from '../google-calendar.service';
 
 @Component({
   selector: 'app-day-view',
@@ -7,9 +8,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DayViewComponent implements OnInit {
 
-  constructor() {}
+  private calendarService: GoogleCalendarService;
+
+  constructor(private aCalendarService: GoogleCalendarService) {
+    this.calendarService = aCalendarService;
+  }
 
   ngOnInit() {
   }
 
+  addEvent(): void {
+
+
+    const start = new Date();
+    console.log(start.toISOString());
+    const end = new Date();
+    end.setTime(start.getTime() + (1 * 60 * 60 * 1000));
+    const event = {
+      'summary': 'Google I/O 2015',
+      'location': '800 Howard St., San Francisco, CA 94103',
+      'description': 'A chance to hear more about Google\'s developer products.',
+      'start': {
+        'dateTime': '2017-06-06T15:00:00-05:00',
+        'timeZone': 'America/Chicago'
+      },
+      'end': {
+        'dateTime': '2017-06-06T16:00:00-05:00',
+        'timeZone': 'America/Chicago'
+      },
+      'recurrence': [
+        'RRULE:FREQ=DAILY;COUNT=1'
+      ],
+      'attendees': [
+        {'email': 'kevin@example.com'},
+        {'email': 'clark@example.com'}
+      ],
+      'reminders': {
+        'useDefault': false,
+        'overrides': [
+          {'method': 'email', 'minutes': 24 * 60},
+          {'method': 'popup', 'minutes': 10}
+        ]
+      }
+    };
+
+    this.calendarService.AddEvent({
+      calendarId: 'primary',
+      resource: event
+    });
+  }
 }

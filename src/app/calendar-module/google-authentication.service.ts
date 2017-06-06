@@ -6,7 +6,7 @@ import {environment} from '../../environments/environment';
 export class GoogleAuthenticationService {
   // constants
   static clientId = environment.clientID;
-  static scopes = ['https://www.googleapis.com/auth/calendar.readonly'];
+  static scopes = ['https://www.googleapis.com/auth/calendar'];
 
   public isAuthenticated = false;
 
@@ -32,12 +32,12 @@ export class GoogleAuthenticationService {
       GoogleLoadApiService.load()
         .then((gapi) => this.internalAuthentication(immediateAuth))
         .then((authenticated) => {
-          this.authenticated(authenticated);
+          this.postAuthenticate(authenticated);
           resolve(window['gapi'].client);
         })
         .catch((error: any) => {
           console.log('authentication failed: ' + error);
-          reject(error);
+          reject(null);
         });
 
     });
@@ -67,7 +67,7 @@ export class GoogleAuthenticationService {
     });
   }
 
-  private authenticated(isAuthenitcated: boolean) {
+  private postAuthenticate(isAuthenitcated: boolean) {
     console.log('post authentication status: ' + isAuthenitcated );
     console.log(window['gapi'].client);
   }

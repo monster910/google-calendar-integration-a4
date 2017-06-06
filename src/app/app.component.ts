@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Welcome to Google Calendar Example for Angular 4';
+  title = 'Google Calendar Example for Angular 4';
 }

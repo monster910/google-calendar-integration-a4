@@ -59,4 +59,15 @@ export class GoogleCalendarService {
       });
     });
   }
+
+  public AddEvent(event): void {
+    this.loadAPI().then((calendar) => {
+      const request = calendar.events.insert(event);
+      request.execute(function(resp) {
+        console.log('event added');
+      }, function(error) {
+        console.log(error);
+      });
+    });
+  }
 }
