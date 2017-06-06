@@ -20,7 +20,11 @@ export class WeekViewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     console.log('here');
-    this.calendarService.GetCalendars();
+    this.calendarService.GetCalendars({});
+    this.calendarService.GetEvents(
+      { calendarId: 'primary',
+        timeMin: (new Date()).toISOString()
+      });
   }
 
 }

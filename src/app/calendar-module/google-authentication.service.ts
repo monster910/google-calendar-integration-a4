@@ -6,6 +6,7 @@ export class GoogleAuthenticationService {
   // constants
   static clientId = '978628212480-qoao2rskqn6ceka482rutnncunj4h2j9.apps.googleusercontent.com';
   // static apiKey = 'AIzaSyC_AVRBRTKnnd2C8ZBQxwv708KiCFnYti0';
+  // TODO - abstract this from API
   static scopes = ['https://www.googleapis.com/auth/calendar.readonly'];
 
   public isAuthenticated = false;

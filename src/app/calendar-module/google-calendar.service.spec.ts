@@ -1,11 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { GoogleCalendarService } from './google-calendar.service';
+import { GoogleAuthenticationService } from './google-authentication.service';
 
 describe('GoogleCalendarService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [GoogleCalendarService]
+      providers: [GoogleCalendarService, GoogleAuthenticationService]
     });
   });
 

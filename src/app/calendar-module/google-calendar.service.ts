@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http} from '@angular/http';
-import {GoogleAuthenticationService} from './google-authentication.service';
+import { GoogleAuthenticationService } from './google-authentication.service';
 
 @Injectable()
 export class GoogleCalendarService {
@@ -22,11 +21,11 @@ export class GoogleCalendarService {
       });
   }
 
-  public GetCalendars(): any {
+  public GetCalendars(query): any {
 
     this.loadAPI().then((calendar) => {
       console.log(calendar);
-      const request = calendar.calendarList.list();
+      const request = calendar.calendarList.list(query);
       request.execute(function(resp) {
         const cals = resp.items;
         console.log('Calendars:');
@@ -42,28 +41,22 @@ export class GoogleCalendarService {
       });
 
     });
+  }
 
-    // this.googleAuthService.initializeCalendarAPI().then(
-    //   (response) => {
-    //     console.log(response);
-    //   }
-    // );
-    // const request = window['gapi'].client.calendar.calendarList.list();
-    // request.execute(function(resp) {
-    //   const cals = resp.items;
-    //   console.log('Calendars:');
-    //
-    //   if (cals.length > 0) {
-    //     for (let i = 0; i < cals.length; i++) {
-    //       console.log(cals[i]);
-    //     }
-    //   } else {
-    //     console.log('No calendars found.');
-    //   }
-    //
-    // });
-
-
-
+  public GetEvents(query): any {
+    this.loadAPI().then((calendar) => {
+      console.log(calendar);
+      const request = calendar.events.list(query);
+      request.execute(function(resp) {
+        const events = resp.items;
+        for (const event of events) {
+          let when = event.start.dateTime;
+          if (!when) {
+            when = event.start.date;
+          }
+          console.log(event.summary + ' (' + when + ')');
+        }
+      });
+    });
   }
 }
