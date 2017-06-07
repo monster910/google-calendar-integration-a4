@@ -6,70 +6,45 @@ import {environment} from '../../environments/environment';
 export class GoogleAuthenticationService {
   // constants
   static clientId = environment.clientID;
-  static scopes = ['https://www.googleapis.com/auth/calendar'];
+
+  public static loadClientPromise;
 
   public isAuthenticated = false;
 
-
   constructor() {
-    // check the authentication
-    // this.authenticate(true);
     console.log(GoogleAuthenticationService.clientId);
   }
 
-  public loadAPI() {
-    if (window['gapi'] && window['gapi'].client) {
-      return new Promise((resolve, reject) => {
-        resolve(window['gapi'].client);
-      });
-    } else {
-      return this.authenticate(true);
+  private loadClient(gapi: any) {
+    if (GoogleAuthenticationService.loadClientPromise) {
+      return GoogleAuthenticationService.loadClientPromise;
     }
-  }
-
-  private authenticate(immediateAuth: boolean) {
-    return new Promise((resolve, reject) => {
-      GoogleLoadApiService.load()
-        .then((gapi) => this.internalAuthentication(immediateAuth))
-        .then((authenticated) => {
-          this.postAuthenticate(authenticated);
-          resolve(window['gapi'].client);
-        })
-        .catch((error: any) => {
-          console.log('authentication failed: ' + error);
-          reject(null);
-        });
-
+    GoogleAuthenticationService.loadClientPromise =  new Promise((resolve, reject) => {
+      gapi.load('client:auth2', function() {
+        resolve(gapi);
+      });
     });
+    return GoogleAuthenticationService.loadClientPromise;
   }
 
-  private internalAuthentication(immediateAuth: boolean) {
+  private initClient(gapi: any, initData: any, updateSigninStatus: any) {
     return new Promise((resolve, reject) => {
-      console.log('authentication - immediate: ' + immediateAuth);
-      // window['gapi'].client.setApiKey(GoogleAuthenticationService.apiKey);
-      const authorizationRequestData = {
-        'client_id': GoogleAuthenticationService.clientId,
-        'scope': GoogleAuthenticationService.scopes,
-        'immediate': immediateAuth
-      };
-
-      window['gapi'].auth.authorize(authorizationRequestData,
-        (authData) => {
-          if (authData && ! authData.error) {
-            this.isAuthenticated = true;
-            resolve(this.isAuthenticated);
-          } else {
-            this.isAuthenticated = false;
-            reject(this.isAuthenticated);
+      initData.clientId = GoogleAuthenticationService.clientId;
+      gapi.client.init(initData)
+        .then(function() {
+          // call on state changes
+          if (updateSigninStatus) {
+            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
           }
+          // handle initial signin state and return the loaded client
+          resolve(gapi.client);
         });
-
     });
   }
 
-  private postAuthenticate(isAuthenitcated: boolean) {
-    console.log('post authentication status: ' + isAuthenitcated );
-    console.log(window['gapi'].client);
+  public getClient(initData: any, updateSigninStatus: any) {
+    return GoogleLoadApiService.load()
+      .then((gapi) => this.loadClient(gapi))
+      .then((gapi) => this.initClient(gapi, initData, updateSigninStatus));
   }
-
 }

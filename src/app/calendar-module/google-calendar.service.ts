@@ -3,27 +3,33 @@ import { GoogleAuthenticationService } from './google-authentication.service';
 
 @Injectable()
 export class GoogleCalendarService {
+  static SCOPE = 'https://www.googleapis.com/auth/calendar';
+  static DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
 
   private googleAuthService;
+  private initData;
 
   constructor(private authService: GoogleAuthenticationService) {
     this.googleAuthService = authService;
+    this.initData = {
+      scope: GoogleCalendarService.SCOPE,
+      discoverDocs: GoogleCalendarService.DISCOVERY_DOCS
+    };
   }
 
-  public loadAPI() {
-    return this.googleAuthService.loadAPI()
-      .then((clientAPI) => {
-        return new Promise((resolve, reject) => {
+  public loadAPI(initData: any) {
+    return this.googleAuthService.getClient(initData)
+      .then((clientAPI) =>
+        new Promise((resolve, reject) => {
           clientAPI.load('calendar', 'v3', () => {
             resolve(clientAPI.calendar);
           });
-        });
-      });
+        })
+      );
   }
 
   public GetCalendars(query): any {
-
-    this.loadAPI().then((calendar) => {
+    this.loadAPI(this.initData).then((calendar) => {
       console.log(calendar);
       const request = calendar.calendarList.list(query);
       request.execute(function(resp) {
@@ -44,7 +50,7 @@ export class GoogleCalendarService {
   }
 
   public GetEvents(query): any {
-    this.loadAPI().then((calendar) => {
+    this.loadAPI(this.initData).then((calendar) => {
       console.log(calendar);
       const request = calendar.events.list(query);
       request.execute(function(resp) {
@@ -61,7 +67,7 @@ export class GoogleCalendarService {
   }
 
   public AddEvent(event): void {
-    this.loadAPI().then((calendar) => {
+    this.loadAPI(this.initData).then((calendar) => {
       const request = calendar.events.insert(event);
       request.execute(function(resp) {
         console.log('event added');

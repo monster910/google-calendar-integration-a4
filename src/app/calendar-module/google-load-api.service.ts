@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class GoogleLoadApiService {
 
   // constants
-  static URL = 'https://apis.google.com/js/client.js?onload=__onLoaded';
+  static URL = 'https://apis.google.com/js/api.js?onload=__onLoaded';
 
   public static promise;
 
