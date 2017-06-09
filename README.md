@@ -1,6 +1,8 @@
 # GoogleCalendarTimesheetsA4
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.5.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.5. 
+
+To install angular-cli, `npm install -g angular-cli`
 
 ## Development server
 
@@ -22,6 +24,18 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
+
+## Build using Docker
+
+`docker build -t google-calendar-timesheets-a4 .`
+
+## Running in Docker
+
+`docker run --rm -t -p 8080:4200 google-calendar-timesheets-a4`
+
+and open the follow in a browser
+
+`<vm ip address | vm URL>:8080`
 
 ## Further help
 
