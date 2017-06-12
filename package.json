@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "echo": "cross-var echo $ENV",
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --disable-host-check",
+    "start": "cross-var ng serve --host 0.0.0.0 --env=$ENV",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -21,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
+    "cross-var": "^1.0.3",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },

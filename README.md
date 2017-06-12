@@ -31,7 +31,7 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 ## Running in Docker
 
-`docker run --rm -t -p 8080:4200 google-calendar-timesheets-a4`
+`docker run --rm -t -e ENV="prod" -p 8080:4200 google-calendar-timesheets-a4`
 
 and open the follow in a browser
 

@@ -1,11 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CalendarViewsModule } from './calendar-module/calendar.module';
+import { ErrorViewComponent } from './errors/error-view/error-view.component';
+import {GlobalErrorHandler} from './errors/error-handler';
+import {ErrorManagerService} from './errors/error-manager.service';
+import {ErrorsModule} from './errors/errors.module';
 
 @NgModule({
   declarations: [
@@ -16,9 +20,10 @@ import { CalendarViewsModule } from './calendar-module/calendar.module';
     FormsModule,
     HttpModule,
     CalendarViewsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ErrorsModule
   ],
-  providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
