@@ -4,12 +4,10 @@ import {environment} from '../../environments/environment';
 
 @Injectable()
 export class GoogleAuthenticationService {
-  // constants
+  // see environment files for clientID values
   static clientId = environment.clientID;
 
   public static loadClientPromise;
-
-  public isAuthenticated = false;
 
   constructor() {
     console.log(GoogleAuthenticationService.clientId);
@@ -36,10 +34,34 @@ export class GoogleAuthenticationService {
           if (updateSigninStatus) {
             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
           }
-          // handle initial signin state and return the loaded client
-          resolve(gapi.client);
+          if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+            // handle initial signin state and return the loaded client
+            resolve(gapi);
+          } else {
+            reject(gapi);
+          }
+
         });
     });
+  }
+
+  public isSignedIn() {
+    return GoogleLoadApiService.load()
+      .then((gapi) => this.loadClient(gapi))
+      .then((gapi) => new Promise((resolve, reject) => {
+          if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+            resolve(true);
+          } else {
+            reject(false);
+          }
+        })
+      );
+  }
+
+  public signIn() {
+    return GoogleLoadApiService.load()
+      .then((gapi) => this.loadClient(gapi))
+      .then((gapi) => gapi.auth2.getAuthInstance().signIn());
   }
 
   public getClient(initData: any, updateSigninStatus: any) {
