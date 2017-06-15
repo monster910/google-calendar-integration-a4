@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ErrorViewComponent } from './error-view.component';
+import {ErrorManagerService} from '../error-manager.service';
 
 describe('ErrorViewComponent', () => {
   let component: ErrorViewComponent;
@@ -8,7 +9,8 @@ describe('ErrorViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ErrorViewComponent ]
+      declarations: [ ErrorViewComponent ],
+      providers: [ ErrorManagerService ]
     })
     .compileComponents();
   }));

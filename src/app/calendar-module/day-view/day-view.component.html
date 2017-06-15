@@ -1,4 +1,5 @@
 <p>
   day-view works!
-  <button (click)="addEvent()">Add event</button>
+  <button *ngIf="!calendarService.isSignedIn" (click)="calendarService.googleAuthService.signIn()">Authorize</button>
+  <button *ngIf="calendarService.isSignedIn" (click)="addEvent()">Add event</button>
 </p>

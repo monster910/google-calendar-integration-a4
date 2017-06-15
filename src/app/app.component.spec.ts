@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CalendarViewsModule } from './calendar-module/calendar.module';
+import { ErrorsModule } from './errors/errors.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -13,7 +14,8 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterTestingModule,
-        CalendarViewsModule
+        CalendarViewsModule,
+        ErrorsModule
       ],
     }).compileComponents();
   }));
@@ -24,10 +26,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'Welcome to Google Calendar Example for Angular 4'`, async(() => {
+  it(`should have as title 'Google Calendar Example for Angular 4'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Welcome to Google Calendar Example for Angular 4');
+    expect(app.title).toEqual('Google Calendar Example for Angular 4');
   }));
 
   it('should render title in a h1 tag', async(() => {

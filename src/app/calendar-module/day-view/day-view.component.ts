@@ -22,18 +22,19 @@ export class DayViewComponent implements OnInit {
 
     const start = new Date();
     console.log(start.toISOString());
+    console.log(start.getTimezoneOffset() / 60);
     const end = new Date();
     end.setTime(start.getTime() + (1 * 60 * 60 * 1000));
     const event = {
-      'summary': 'Google I/O 2015',
-      'location': '800 Howard St., San Francisco, CA 94103',
-      'description': 'A chance to hear more about Google\'s developer products.',
+      'summary': 'My New Appointment',
+      'location': 'Yonkers, NY 10705',
+      'description': 'A chance to hear more about developer.',
       'start': {
-        'dateTime': '2017-06-06T15:00:00-05:00',
+        'dateTime': '2017-06-06T15:00:00',
         'timeZone': 'America/Chicago'
       },
       'end': {
-        'dateTime': '2017-06-06T16:00:00-05:00',
+        'dateTime': '2017-06-06T16:00:00',
         'timeZone': 'America/Chicago'
       },
       'recurrence': [
@@ -52,7 +53,7 @@ export class DayViewComponent implements OnInit {
       }
     };
 
-    this.calendarService.AddEvent({
+    this.calendarService.addEvent({
       calendarId: 'primary',
       resource: event
     });

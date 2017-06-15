@@ -1,3 +1,4 @@
 <p>
   week-view works!
+  <button *ngIf="!calendarService.isSignedIn" (click)="handleAuthClick()">Authorize</button>
 </p>

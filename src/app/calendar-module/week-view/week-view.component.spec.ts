@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WeekViewComponent } from './week-view.component';
-import {GoogleCalendarService} from '../google-calendar.service';
-import {GoogleAuthenticationService} from '../google-authentication.service';
+import { GoogleCalendarService } from '../google-calendar.service';
+import { GoogleAuthenticationService } from '../google-authentication.service';
 
 describe('WeekViewComponent', () => {
   let component: WeekViewComponent;
