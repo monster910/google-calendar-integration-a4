@@ -83,6 +83,7 @@ export class AddEventComponent implements OnInit {
     }).then((response) => {
       this.addComplete = true;
       this.success = true;
+      this.eventForm.reset();
     }, (error) => {
       this.addComplete = true;
       this.success = false;
