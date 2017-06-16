@@ -1,0 +1,44 @@
+<button *ngIf="!calendarService.isSignedIn" (click)="calendarService.googleAuthService.signIn()">Authorize</button>
+<div *ngIf="calendarService.isSignedIn">
+  add-event works!
+
+  <form [formGroup]="eventForm" (ngSubmit)="addEvent()">
+    <div class="form-group">
+      <label class="center-block">Summary:
+        <input class="form-control" formControlName="summary">
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="center-block">Location:
+        <input class="form-control" formControlName="location">
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="center-block">Description:
+        <input class="form-control" formControlName="description">
+      </label>
+    </div>
+    <div class="form-group">
+      <label>Start:</label>
+      <input type="date" class="form-control" formControlName="startTime" useValueAsDate/>
+      <timepicker formControlName="startTime"></timepicker>
+    </div>
+    <div class="form-group" style="display:inline-block;">
+      <label>End:</label>
+      <input type="date" class="form-control" formControlName="endTime" useValueAsDate/>
+      <timepicker formControlName="endTime"></timepicker>
+    </div>
+    <div>
+      <button type="submit" [disabled]="eventForm.pristine" class="btn btn-success">Add event</button>
+    </div>
+  </form>
+  <p>Form value: {{ eventForm.value | json }}</p>
+
+  <alert type="success" *ngIf="addComplete && success" [dismissOnTimeout]="5000">
+    <strong>Event added</strong> Go check your Google calendar.
+  </alert>
+  <alert type="danger" *ngIf="addComplete && !success" [dismissOnTimeout]="5000">
+    <strong>Error</strong> {{addEventError}}
+  </alert>
+</div>
+

@@ -114,16 +114,21 @@ export class GoogleCalendarService {
    * Add the event
    *
    * @param event the event to add
+   * @return Promise of the action
    *
    * @see https://developers.google.com/google-apps/calendar/v3/reference/events/insert
    */
-  public addEvent(event): void {
-    this.loadAPI(this.initData).then((calendar) => {
-      const request = calendar.events.insert(event);
-      request.execute(function(resp) {
-        console.log('event added');
-      }, function(error) {
-        console.log(error);
+  public addEvent(event): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.loadAPI(this.initData).then((calendar) => {
+        const request = calendar.events.insert(event);
+        request.execute((response) => {
+          if (response.code) {
+            reject(response);
+          } else {
+            resolve(response);
+          }
+        });
       });
     });
   }

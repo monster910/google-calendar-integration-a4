@@ -1,15 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {ErrorHandler, NgModule} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CalendarViewsModule } from './calendar-module/calendar.module';
-import { ErrorViewComponent } from './errors/error-view/error-view.component';
-import {GlobalErrorHandler} from './errors/error-handler';
-import {ErrorManagerService} from './errors/error-manager.service';
-import {ErrorsModule} from './errors/errors.module';
+import { ErrorsModule } from './errors/errors.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +13,6 @@ import {ErrorsModule} from './errors/errors.module';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpModule,
     CalendarViewsModule,
     AppRoutingModule,

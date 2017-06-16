@@ -9,7 +9,6 @@ export class GoogleLoadApiService {
   public static promise;
 
   public isAuthenticated = false;
-  loadAPI: Promise<any>;
 
   /**
    * Dynamically insert load script and initialize callback

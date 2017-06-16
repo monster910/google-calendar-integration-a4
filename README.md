@@ -1,7 +1,9 @@
 # GoogleCalendarTimesheetsA4
 
-This project demonstrates the use of the Google Calendar API using Angular4. Before you can use the project
-you must obtain a clientID from Google. Go to google and provision an API to use google calendars.
+This project demonstrates the use of the Google Calendar API using Angular4. It uses bootstrap via ngx-bootstrap
+for UI components.
+ 
+Before you can use the project you must obtain a clientID from Google. Go to google and provision an API to use google calendars.
 
 https://console.developers.google.com/apis/dashboard
 

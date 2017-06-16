@@ -8,10 +8,7 @@ import {GoogleCalendarService} from '../google-calendar.service';
 })
 export class DayViewComponent implements OnInit {
 
-  private calendarService: GoogleCalendarService;
-
-  constructor(private aCalendarService: GoogleCalendarService) {
-    this.calendarService = aCalendarService;
+  constructor(private calendarService: GoogleCalendarService) {
   }
 
   ngOnInit() {
