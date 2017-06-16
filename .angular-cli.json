@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "google-calendar-timesheets-a4"
+    "name": "google-calendar-integration-a4"
   },
   "apps": [
     {

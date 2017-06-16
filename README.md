@@ -1,4 +1,4 @@
-# GoogleCalendarTimesheetsA4
+# Google Calendar Integration for Angular 2+
 
 This project demonstrates the use of the Google Calendar API using Angular4. It uses bootstrap via ngx-bootstrap
 for UI components.
@@ -56,11 +56,11 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 ## Build using Docker
 
-`docker build -t google-calendar-timesheets-a4 .`
+`docker build -t google-calendar-integration-a4 .`
 
 ## Running in Docker
 
-`docker run --rm -t -e ENV="prod" -p 8080:4200 google-calendar-timesheets-a4`
+`docker run --rm -t -e ENV="prod" -p 8080:4200 google-calendar-integration-a4`
 
 and open the follow in a browser
 

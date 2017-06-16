@@ -1,6 +1,6 @@
 import { GoogleCalendarTimesheetsA4Page } from './app.po';
 
-describe('google-calendar-timesheets-a4 App', () => {
+describe('google-calendar-integration-a4 App', () => {
   let page: GoogleCalendarTimesheetsA4Page;
 
   beforeEach(() => {

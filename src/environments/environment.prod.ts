@@ -1,5 +1,5 @@
 export const environment = {
   env: 'prod',
   production: true,
-  clientID: '978628212480-qoao2rskqn6ceka482rutnncunj4h2j9.apps.googleusercontent.com'
+  clientID: 'Enter your client ID'
 };
