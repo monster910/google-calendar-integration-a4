@@ -63,49 +63,44 @@ export class GoogleCalendarService {
   /**
    * Get calendars
    * @param query json structure to narrow calendar options
+   * @return Promise of the action
    *
    * @see https://developers.google.com/google-apps/calendar/v3/reference/calendarList/list
    */
   public getCalendars(query): any {
-    this.loadAPI(this.initData).then((calendar) => {
-      console.log(calendar);
-      const request = calendar.calendarList.list(query);
-      request.execute(function(resp) {
-        const cals = resp.items;
-        console.log('Calendars:');
-
-        if (cals.length > 0) {
-          for (let i = 0; i < cals.length; i++) {
-            console.log(cals[i]);
+    return new Promise((resolve, reject) => {
+      this.loadAPI(this.initData).then((calendar) => {
+        console.log(calendar);
+        const request = calendar.calendarList.list(query);
+        request.execute((response) => {
+          if (response.code) {
+            reject(response);
+          } else {
+            resolve(response);
           }
-        } else {
-          console.log('No calendars found.');
-        }
-
+        });
       });
-
     });
   }
 
   /**
    * Get events
    * @param query json structure to narrow events returned
+   * @return Promise of the action
    *
    * @see https://developers.google.com/google-apps/calendar/v3/reference/events/list
    */
-  public getEvents(query): any {
-    this.loadAPI(this.initData).then((calendar) => {
-      console.log(calendar);
-      const request = calendar.events.list(query);
-      request.execute(function(resp) {
-        const events = resp.items;
-        for (const event of events) {
-          let when = event.start.dateTime;
-          if (!when) {
-            when = event.start.date;
+  public getEvents(query): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.loadAPI(this.initData).then((calendar) => {
+        const request = calendar.events.list(query);
+        request.execute((response) => {
+          if (response.code) {
+            reject(response);
+          } else {
+            resolve(response);
           }
-          console.log(event.summary + ' (' + when + ')');
-        }
+        });
       });
     });
   }
