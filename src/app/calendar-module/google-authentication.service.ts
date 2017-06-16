@@ -1,4 +1,4 @@
-import {AfterViewInit, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {GoogleLoadApiService} from './google-load-api.service';
 import {environment} from '../../environments/environment';
 
