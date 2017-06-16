@@ -1,5 +1,5 @@
 import {Injectable, NgZone} from '@angular/core';
-import { GoogleAuthenticationService } from './google-authentication.service';
+import { GoogleAuthenticationService } from '../auth-module/google-authentication.service';
 
 @Injectable()
 export class GoogleCalendarService {

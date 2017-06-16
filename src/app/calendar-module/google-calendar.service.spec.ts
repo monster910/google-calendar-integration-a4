@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { GoogleCalendarService } from './google-calendar.service';
-import { GoogleAuthenticationService } from './google-authentication.service';
+import { GoogleAuthenticationService } from '../auth-module/google-authentication.service';
 
 describe('GoogleCalendarService', () => {
   beforeEach(() => {

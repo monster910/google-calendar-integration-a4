@@ -4,7 +4,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CalendarViewsModule } from './calendar-module/calendar.module';
+import { GoogleAuthModule } from './auth-module/google-auth.module';
+import { CalendarModule } from './calendar-module/calendar.module';
 import { ErrorsModule } from './errors/errors.module';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ErrorsModule } from './errors/errors.module';
   imports: [
     BrowserModule,
     HttpModule,
-    CalendarViewsModule,
+    GoogleAuthModule,
+    CalendarModule,
     AppRoutingModule,
     ErrorsModule
   ],

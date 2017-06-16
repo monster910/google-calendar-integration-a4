@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DayViewComponent } from './day-view.component';
 import { GoogleCalendarService } from '../google-calendar.service';
-import { GoogleAuthenticationService } from '../google-authentication.service';
+import { GoogleAuthenticationService } from '../../auth-module/google-authentication.service';
 
 describe('DayViewComponent', () => {
   let component: DayViewComponent;
