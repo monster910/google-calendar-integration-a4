@@ -19,9 +19,11 @@ export class WeekViewComponent implements OnInit, AfterViewInit {
    * issues that might occur on signin - user dismisses login popup or reject sharing
    */
   handleAuthClick() {
+    const self = this;
     this.calendarService.googleAuthService.signIn().then(
       function(request) {
       console.log(request);
+      self.ngAfterViewInit();
     }, function(error) {
       console.log(error);
     });
@@ -63,8 +65,4 @@ export class WeekViewComponent implements OnInit, AfterViewInit {
     });
   }
 
-  showValue() {
-    console.log(this.calendarService.isSignedIn);
-    console.log(this.calendarService.isSignedIn === window['__googleCalendarService'].isSignedIn);
-  }
 }
