@@ -12,7 +12,6 @@ I created OAuth 2.0 client IDs for credentials.
 2. Pick a name
 3. Add http://localhost:4200 as one origin (later you can add http://localhost:8080 for docker executions)
 
-
 It has the following within the project
 
 ### CalendarModule
@@ -23,7 +22,7 @@ you to add an event to a calendar.
 This service loads the Google API and is a promise based system that other Google service wrappers can use
 
 #### GoogleAuthenticationService
-This service handles authenticating the Google API. It uses the GoogleLoadService
+This service handles authenticating the Google API. It uses the GoogleLoadApiService
 
 #### GoogleCalendarService
 This service handles interactions with Calendar API. It uses GoogleAuthententicationService which uses
