@@ -1,6 +1,6 @@
 # Google Calendar Integration for Angular 2+
 
-This project demonstrates the use of the Google Calendar API using Angular4. It uses bootstrap via ngx-bootstrap
+This project demonstrates the use of the Google Calendar API using Angular4. It also uses bootstrap via ngx-bootstrap
 for UI components.
  
 Before you can use the project you must obtain a clientID from Google. Go to google and provision an API to use google calendars.
@@ -68,3 +68,5 @@ and open the follow in a browser
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+Author: Kevin Clark  (monster910@hotmail.com)
